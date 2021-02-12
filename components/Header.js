@@ -1,19 +1,17 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 
-const Header = ({ brand }) => {
-  return(
+const Header = ({brand}) => {
+  return (
     <View style={styles.header}>
-      <Text style={styles.text}>
-        {brand}
-      </Text>
+      <Text style={styles.text}>{brand}</Text>
     </View>
-  )
-}
+  );
+};
 
 Header.defaultProps = {
-  brand: 'CalCalorias'
-}
+  brand: 'CalCalorias',
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -22,12 +20,11 @@ const styles = StyleSheet.create({
     backgroundColor: 'darkslateblue',
   },
 
-  text:{
+  text: {
     color: '#fff',
     fontSize: 23,
-    textAlign: 'center'
-  }
-})
-
+    textAlign: 'center',
+  },
+});
 
 export default Header;
