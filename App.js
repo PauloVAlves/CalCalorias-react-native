@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import Header from './components/Header'
 import ListItem from './components/ListItem'
 import SearchFood from './components/SearchFood'
@@ -18,6 +18,7 @@ const App = () => {
   const [error, setError] = useState(null);
   const [myList, setMyList] = useState([]);
   const [searchList, setSearchList] = useState([]);
+  
   
   
   useEffect(() => {
@@ -61,6 +62,8 @@ const App = () => {
       return [{item}, ...prevList]
     })
   }
+
+  
 
   if(error){return (<View><Text>Error: {error.message}</Text></View>)}
   else if(!isLoaded) {return (<View><Text>Loading</Text></View>)}

@@ -1,16 +1,15 @@
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import FoodItem from './ListItem'
+import React from 'react';
+import {View, StyleSheet} from 'react-native';
+import FoodItem from './ListItem';
 
-const FoodList = ({ foodList }) => {
-  return(
+const FoodList = ({foodList}) => {
+  return (
     <View>
-
-    {foodList.map((food) => (
-      <FoodItem key={food.id} food={food}/>
+      {foodList.map((food) => (
+        <FoodItem key={food.id} food={food} />
       ))}
-      </View>
-  )
-}
+    </View>
+  );
+};
 
 export default FoodList;
