@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import Header from './components/Header';
-import ListItem from './components/ListItem';
+import Recipe from './components/Recipe';
 import SearchFood from './components/SearchFood';
 import SearchResult from './components/SearchResult';
 
@@ -86,6 +86,7 @@ const App = () => {
         (
           <ListItem item={item} deleteItem={deleteItem}/>
         )}/> */}
+        <Recipe myList={myList} />
       </View>
     );
   }
