@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import { TextInput, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { TextInput, StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
 import ModalResult from './ModalResult'
 
 const Calculate = ({myList}) => {
-  const [portion, setPortion] = useState('');
-  const [finalResult, setFinalResult] = useState('');
-  const [recipeTotalCalories, setRecipeTotalCalories] = useState('');
+  const [portion, setPortion] = useState(0);
+  const [finalResult, setFinalResult] = useState(0);
+  const [recipeTotalCalories, setRecipeTotalCalories] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
   let totalGrams = 0;
   let getCaloriesPortion = 0;
@@ -24,21 +24,26 @@ const Calculate = ({myList}) => {
   };
 
   const calculate = () => {
-    
+    if(!portion) {
+      Alert.alert('Informe a porção')
+    } else{
 
-    myList.forEach((food) => {
-      totalGrams += food.quantity;
-      getCaloriesPortion = food.quantity / food.base;
-      setCaloriesPortion = food.cal * getCaloriesPortion;
-      totalCalories += setCaloriesPortion;
-      totalRecipeCalories += setCaloriesPortion;
-    });
-
-    let div = totalGrams / portion;
-    let calculatedCalories = totalCalories / div;
-    setFinalResult(calculatedCalories);
-    setRecipeTotalCalories(totalRecipeCalories);
-    openModal()
+      
+      
+      myList.forEach((food) => {
+        totalGrams += food.quantity;
+        getCaloriesPortion = food.quantity / food.base;
+        setCaloriesPortion = food.cal * getCaloriesPortion;
+        totalCalories += setCaloriesPortion;
+        totalRecipeCalories += setCaloriesPortion;
+      });
+      
+      let div = totalGrams / portion;
+      let calculatedCalories = totalCalories / div;
+      setFinalResult(calculatedCalories);
+      setRecipeTotalCalories(totalRecipeCalories);
+      openModal()
+    }
   };
   return(
     <View>
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     height: 60,
     padding: 8,
-    fontSize: 16,
+    fontSize: 22,
   },
 
   btn: {

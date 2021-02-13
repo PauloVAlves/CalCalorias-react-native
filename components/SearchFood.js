@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     height: 60,
     padding: 8,
-    fontSize: 16,
+    fontSize: 22,
   },
 
   btn: {

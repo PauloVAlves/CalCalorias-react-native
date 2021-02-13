@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 
   resultName: {
-    fontSize: 18,
+    fontSize: 22,
   },
 });
 

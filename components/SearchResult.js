@@ -34,7 +34,7 @@ const SearchResult = ({searchList, addToRecipe}) => {
         renderItem={({item}) => (
           <ResultItem item={item} openModal={openModal} />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
       />
       <ModalQuantity
         id={id}

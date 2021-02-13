@@ -11,7 +11,7 @@ const Recipe = ({myList, deleteItem}) => {
       renderItem={({item}) => (
         <RecipeItem item={item} deleteItem={deleteItem} />
       )}
-      keyExtractor={(item) => item.id}
+      keyExtractor={(item) => item.id.toString()}
       >
 
     

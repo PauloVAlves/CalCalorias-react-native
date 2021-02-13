@@ -13,7 +13,7 @@ const RecipeItem = ({item, deleteItem}) => {
         </TouchableOpacity>
       </View>
       <View>
-        <Text>{item.quantity}g</Text>
+        <Text style={styles.quantity}>{item.quantity}g</Text>
     </View>
     </View>
   );
@@ -38,8 +38,11 @@ const styles = StyleSheet.create({
   },
 
   FoodName: {
-    fontSize: 18,
+    fontSize: 22,
   },
+  quantity:{
+    fontSize: 18
+  }
 });
 
 export default RecipeItem;
