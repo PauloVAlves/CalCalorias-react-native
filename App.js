@@ -1,10 +1,15 @@
+import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import {View, Text, StyleSheet} from 'react-native';
 import Header from './components/Header';
+import RecipeScreen from './components/RecipeScreen';
 import Recipe from './components/Recipe';
 import SearchFood from './components/SearchFood';
 import SearchResult from './components/SearchResult';
 
+const Tab = createMaterialTopTabNavigator();
 const App = () => {
   const API_URL = 'https://floating-lowlands-85751.herokuapp.com/api/food';
   const [foodList, setFoodList] = useState([]);
@@ -78,16 +83,22 @@ const App = () => {
     );
   } else {
     return (
-      <View style={styles.container}>
+      <NavigationContainer style={styles.container}>
         <Header />
-        <SearchFood searchItem={searchItem} />
-        <SearchResult searchList={searchList} addToRecipe={addToRecipe} />
-        {/*  <FlatList data={searchList} renderItem={({item}) => 
-        (
-          <ListItem item={item} deleteItem={deleteItem}/>
-        )}/> */}
-        <Recipe myList={myList} />
-      </View>
+        <Tab.Navigator>
+          <Tab.Screen name="Procurar">
+            {/* 
+              This next line have to be in one line for some reason
+              once I format everything breaks
+            */}
+            {(props) => <SearchFood {...props} searchItem={searchItem} searchList={searchList} addToRecipe={addToRecipe} /> }
+          </Tab.Screen>
+
+          <Tab.Screen name="Receita">
+            {(props) => <RecipeScreen {...props} myList={myList} />}
+          </Tab.Screen>
+        </Tab.Navigator>
+      </NavigationContainer>
     );
   }
 };

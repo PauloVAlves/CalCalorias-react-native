@@ -8,8 +8,9 @@ import {
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import SearchResult from './SearchResult';
 
-const AddFood = ({searchItem}) => {
+const AddFood = ({searchItem, addToRecipe, searchList}) => {
   const [searchString, setSearchString] = useState('');
 
   const onChange = (textValue) => {
@@ -36,6 +37,7 @@ const AddFood = ({searchItem}) => {
           <Icon name="search" size={20} /> Procurar
         </Text>
       </TouchableOpacity>
+      <SearchResult searchList={searchList} addToRecipe={addToRecipe} />
     </View>
   );
 };
