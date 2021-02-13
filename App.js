@@ -53,8 +53,8 @@ const App = () => {
   };
 
   const deleteItem = (id) => {
-    myList((prev) => {
-      prev.filter((item) => item.id !== id);
+    setMyList((prev) => {
+      return prev.filter((item) => item.id !== id);
     });
   };
 
@@ -94,8 +94,8 @@ const App = () => {
         <Tab.Navigator>
           <Tab.Screen name="Procurar">
             {/* 
-              This next line have to be in one line for some reason
-              once I format everything breaks
+              The next line have to be in one line for some reason,
+              once I format, everything breaks.
             */}
             {(props) => <SearchFood {...props} searchItem={searchItem} searchList={searchList} addToRecipe={addToRecipe} /> }
           </Tab.Screen>

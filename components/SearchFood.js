@@ -28,7 +28,7 @@ const AddFood = ({searchItem, addToRecipe, searchList}) => {
   return (
     <View>
       <TextInput
-        placeholder="Selecione o alimento"
+        placeholder="Digite o nome do alimento"
         style={styles.input}
         onChangeText={onChange}
       />
@@ -44,6 +44,7 @@ const AddFood = ({searchItem, addToRecipe, searchList}) => {
 
 const styles = StyleSheet.create({
   input: {
+    textAlign: 'center',
     height: 60,
     padding: 8,
     fontSize: 16,

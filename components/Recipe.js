@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, FlatList} from 'react-native';
+import Calculate from './Calculate';
 import RecipeItem from './RecipeItem';
 
 const Recipe = ({myList, deleteItem}) => {

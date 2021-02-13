@@ -1,11 +1,13 @@
 import React from 'react';
 import {View} from 'react-native';
+import Calculate from './Calculate';
 import Recipe from './Recipe';
 
-const RecipeScreen = ({myList}) => {
+const RecipeScreen = ({myList, deleteItem}) => {
   return (
     <View>
-      <Recipe myList={myList} />
+      <Calculate myList={myList}/>
+      <Recipe myList={myList} deleteItem={deleteItem}/>
     </View>
   );
 };

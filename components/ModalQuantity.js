@@ -34,7 +34,7 @@ const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
                 }}
               />
             </Pressable>
-            <Text>{id}</Text>
+            
             <TextInput
               style={styles.textInput}
               keyboardType="number-pad"
