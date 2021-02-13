@@ -13,7 +13,7 @@ const ResultItem = ({item, openModal}) => {
             size={30}
             color="#0033cc"
             onPress={() => {
-              openModal();
+              openModal(item.id);
             }}
           />
         </TouchableOpacity>

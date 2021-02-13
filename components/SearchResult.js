@@ -22,7 +22,7 @@ const SearchResult = ({searchList, addToRecipe}) => {
       Alert.alert('Erro', 'Informe a quantidade');
     } else {
       addToRecipe(id, quantity);
-      setQuantity(0);
+      setQuantity('');
       setModalVisible(!modalVisible);
       Alert.alert('Adicionado à receita');
     }

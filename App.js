@@ -53,21 +53,27 @@ const App = () => {
   };
 
   const deleteItem = (id) => {
-    setFoodList((prev) => {
+    myList((prev) => {
       prev.filter((item) => item.id !== id);
     });
   };
 
   const addToRecipe = (id, quantity) => {
-    let item = foodList.filter((item) => item.id === id);
-    let food = {
-      item: item,
-      quantity: quantity,
-    };
-    setMyList((prevList) => {
-      return [{food}, ...prevList];
-    });
-  };
+    searchList.forEach((item) => {
+      if(item.id === id) {
+        let food = {
+          id: item.id,
+          name: item.description,
+          cal: item.attributes.energy.kcal,
+          base: item.base_qty,
+          quantity: Number(quantity),
+      };
+      setMyList([...myList, food]);
+      }
+          
+  });
+}
+  
 
   if (error) {
     return (
@@ -95,7 +101,7 @@ const App = () => {
           </Tab.Screen>
 
           <Tab.Screen name="Receita">
-            {(props) => <RecipeScreen {...props} myList={myList} />}
+            {(props) => <RecipeScreen {...props} myList={myList} deleteItem={deleteItem}/>}
           </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>

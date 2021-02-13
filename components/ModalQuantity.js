@@ -21,7 +21,6 @@ const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
         transparent={true}
         visible={modalVisible}
         onREquestClose={() => {
-          Alert.alert('Modal has been closed.');
           modalEvent();
         }}>
         <View style={styles.centerView}>
@@ -35,6 +34,7 @@ const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
                 }}
               />
             </Pressable>
+            <Text>{id}</Text>
             <TextInput
               style={styles.textInput}
               keyboardType="number-pad"
@@ -44,7 +44,6 @@ const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
             />
             <Pressable
               style={styles.button}
-              // onPress={getData(id, quantityValue)}
               onPress={() => getData(id, quantityValue)}>
               <Text style={styles.textStyle}>Adicionar</Text>
             </Pressable>
