@@ -1,19 +1,30 @@
 import React, {useState} from 'react';
 import { TextInput, StyleSheet, View, TouchableOpacity, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome'
+import ModalResult from './ModalResult'
 
 const Calculate = ({myList}) => {
   const [portion, setPortion] = useState('');
   const [finalResult, setFinalResult] = useState('');
   const [recipeTotalCalories, setRecipeTotalCalories] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
   let totalGrams = 0;
   let getCaloriesPortion = 0;
   let totalCalories = 0;
   let totalRecipeCalories = 0;
   let setCaloriesPortion = 0;
 
-  const calcular = (e) => {
-    e.preventDefault();
+
+  const openModal = () => {
+    setModalVisible(true);    
+  };
+
+  const modalEvent = () => {
+    setModalVisible(!modalVisible);
+  };
+
+  const calculate = () => {
+    
 
     myList.forEach((food) => {
       totalGrams += food.quantity;
@@ -27,6 +38,7 @@ const Calculate = ({myList}) => {
     let calculatedCalories = totalCalories / div;
     setFinalResult(calculatedCalories);
     setRecipeTotalCalories(totalRecipeCalories);
+    openModal()
   };
   return(
     <View>
@@ -41,6 +53,13 @@ const Calculate = ({myList}) => {
           <Icon name="calculator" size={20} /> Calcular
         </Text>
       </TouchableOpacity>
+      <ModalResult
+        finalResult={finalResult}
+        recipeTotalCalories={recipeTotalCalories}
+        setModalVisible={setModalVisible}
+        modalVisible={modalVisible}
+        modalEvent={modalEvent}        
+      />
     </View>
   )
 }

@@ -1,20 +1,15 @@
 import React, {useState} from 'react';
 import {
   View,
-  Alert,
   Modal,
   Pressable,
   Text,
-  TextInput,
   StyleSheet,
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
-  const [quantityValue, setQuantityValue] = useState('');
-
-  return (
+const ModalResult = ({recipeTotalCalories, finalResult, modalEvent, setModalVisible, modalVisible}) => {
+  return(
     <View style={styles.centerView}>
       <Modal
         animationType="fade"
@@ -25,26 +20,12 @@ const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
         }}>
         <View style={styles.centerView}>
           <View style={styles.modalView}>
-            <Pressable style={styles.close}>
-              <Icon
-                name="times"
-                style={styles.closeFont}
-                onPress={() => {
-                  modalEvent();
-                }}
-              />
-            </Pressable>            
-            <TextInput
-              style={styles.textInput}
-              keyboardType="number-pad"
-              placeholder="Adicione a quantidade"
-              value={quantityValue}
-              onChangeText={(text) => setQuantityValue(text)}
-            />
+            <Text style={styles.result}>Por Porção: {finalResult.toFixed(1)}</Text>
+            <Text style={styles.total}>Total da receita: {recipeTotalCalories.toFixed(1)}</Text>
             <Pressable
               style={styles.button}
-              onPress={() => getData(id, quantityValue)}>
-              <Text style={styles.textStyle}>Adicionar</Text>
+              onPress={() => setModalVisible(!modalVisible)}>
+              <Text style={styles.textStyle}>Ok</Text>
             </Pressable>
           </View>
         </View>
@@ -88,6 +69,8 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 20,
     padding: 15,
+    paddingLeft: 50,
+    paddingRight: 50,
     elevation: 2,
     marginTop: 10,
     backgroundColor: '#0161e8',
@@ -106,6 +89,15 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#cc2211',
   },
+  result:{
+    fontSize: 40
+  },
+  total:{
+    marginTop: 20,
+    fontSize: 20
+  }
 });
 
-export default ModalQuantity;
+
+
+export default ModalResult;
