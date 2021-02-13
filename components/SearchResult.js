@@ -5,10 +5,16 @@ import ResultItem from './ResultItem';
 
 const SearchResult = ({searchList, addToRecipe}) => {
   const [id, setId] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   const openModal = (id) => {
     setModalVisible(true);
     setId(id);
+  };
+
+  const modalEvent = () => {
+    setModalVisible(!modalVisible);
   };
 
   const getData = (id, quantity) => {
@@ -21,21 +27,22 @@ const SearchResult = ({searchList, addToRecipe}) => {
       Alert.alert('Adicionado à receita');
     }
   };
-
   return (
     <View>
       <FlatList
         data={searchList}
         renderItem={({item}) => (
-          <ResultItem
-            item={item}
-            addToRecipe={addToRecipe}
-            openModal={openModal}
-          />
+          <ResultItem item={item} openModal={openModal} />
         )}
         keyExtractor={(item) => item.id}
       />
-      <ModalQuantity getData={getData} />
+      <ModalQuantity
+        id={id}
+        getData={getData}
+        quantity={quantity}
+        modalEvent={modalEvent}
+        modalVisible={modalVisible}
+      />
     </View>
   );
 };

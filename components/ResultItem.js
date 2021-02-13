@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-const ResultItem = ({item, addToRecipe, openModal}) => {
+const ResultItem = ({item, openModal}) => {
   return (
     <TouchableOpacity style={styles.resultItem}>
       <View style={styles.resultView}>
@@ -13,7 +13,7 @@ const ResultItem = ({item, addToRecipe, openModal}) => {
             size={30}
             color="#0033cc"
             onPress={() => {
-              openModal(item.id);
+              openModal();
             }}
           />
         </TouchableOpacity>

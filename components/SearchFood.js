@@ -5,17 +5,23 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 const AddFood = ({searchItem}) => {
   const [searchString, setSearchString] = useState('');
+
   const onChange = (textValue) => {
     setSearchString(textValue);
   };
 
   const search = (searchString) => {
-    searchItem(searchString);
+    if (!searchString) {
+      Alert.alert('Erro', 'Informe o nome do alimento');
+    } else {
+      searchItem(searchString);
+    }
   };
 
   return (

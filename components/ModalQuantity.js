@@ -8,11 +8,12 @@ import {
   TextInput,
   StyleSheet,
 } from 'react-native';
+
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-const ModalQuantity = ({getData}) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [quantity, setQuantity] = useState(0);
+const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
+  const [quantityValue, setQuantityValue] = useState('');
+
   return (
     <View style={styles.centerView}>
       <Modal
@@ -21,7 +22,7 @@ const ModalQuantity = ({getData}) => {
         visible={modalVisible}
         onREquestClose={() => {
           Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
+          modalEvent();
         }}>
         <View style={styles.centerView}>
           <View style={styles.modalView}>
@@ -30,7 +31,7 @@ const ModalQuantity = ({getData}) => {
                 name="times"
                 style={styles.closeFont}
                 onPress={() => {
-                  setModalVisible(!modalVisible);
+                  modalEvent();
                 }}
               />
             </Pressable>
@@ -38,10 +39,13 @@ const ModalQuantity = ({getData}) => {
               style={styles.textInput}
               keyboardType="number-pad"
               placeholder="Adicione a quantidade"
-              value={quantity}
-              onChangeText={(text) => setQuantity(text)}
+              value={quantityValue}
+              onChangeText={(text) => setQuantityValue(text)}
             />
-            <Pressable style={styles.button} onPress={getData(id, quantity)}>
+            <Pressable
+              style={styles.button}
+              // onPress={getData(id, quantityValue)}
+              onPress={() => getData(id, quantityValue)}>
               <Text style={styles.textStyle}>Adicionar</Text>
             </Pressable>
           </View>
