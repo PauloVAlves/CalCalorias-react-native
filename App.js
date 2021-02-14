@@ -8,6 +8,7 @@ import RecipeScreen from './components/RecipeScreen';
 import Recipe from './components/Recipe';
 import SearchFood from './components/SearchFood';
 import SearchResult from './components/SearchResult';
+import TableFood from './components/TableFood';
 
 const Tab = createMaterialTopTabNavigator();
 const App = () => {
@@ -102,6 +103,10 @@ const App = () => {
 
           <Tab.Screen name="Receita">
             {(props) => <RecipeScreen {...props} myList={myList} deleteItem={deleteItem}/>}
+          </Tab.Screen>
+
+          <Tab.Screen name="Tabela">
+            {(props) => <TableFood {...props} myList={myList}/>}
           </Tab.Screen>
         </Tab.Navigator>
       </NavigationContainer>
