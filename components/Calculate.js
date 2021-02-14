@@ -24,7 +24,10 @@ const Calculate = ({myList}) => {
   };
 
   const calculate = () => {
-    if(!portion) {
+    if(myList.length < 1){
+      Alert.alert('Adicione alimentos à receita')
+    }
+    else if(!portion) {
       Alert.alert('Informe a porção')
     } else{
 
