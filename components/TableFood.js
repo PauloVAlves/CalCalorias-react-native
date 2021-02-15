@@ -1,63 +1,59 @@
 import React, {useContext} from 'react';
-import {DataContext} from '../data/DataContext';
 import {View, Text, StyleSheet} from 'react-native';
+import {DataContext} from '../data/DataContext';
 
 const TableFood = () => {
-  const {food} = useContext(DataContext);
+  const {calculated} = useContext(DataContext);
   return (
     <View style={styles.view}>
-      <View style={styles.viewHeader}>
-        <Text style={styles.textHeader}>Porção de {food}g</Text>
-      </View>
-
       <View style={styles.foodItem}>
         <Text style={styles.text}>Valor Energético </Text>
-        <Text style={styles.text}>50kcal = 240kJ</Text>
+        <Text style={styles.text}>{calculated.cal.toFixed(1)}kcal = kJ</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Carboidratos</Text>
-        <Text style={styles.text}> {food}g</Text>
+        <Text style={styles.text}> {calculated.carboidratos.toFixed(1)}g</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Proteínas</Text>
-        <Text style={styles.text}> {food}g</Text>
+        <Text style={styles.text}> {calculated.proteinas.toFixed(1)}g</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Gorduras totais</Text>
-        <Text style={styles.text}> {food}g</Text>
+        <Text style={styles.text}> {calculated.gTotais.toFixed(1)}g</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Gorduras saturadas</Text>
-        <Text style={styles.text}> {food}g</Text>
+        <Text style={styles.text}> {calculated.gSaturadas.toFixed(1)}g</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Gorduras trans</Text>
-        <Text style={styles.text}>{food}g</Text>
+        <Text style={styles.text}>{calculated.gTrans.toFixed(1)}g</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Colesterol</Text>
-        <Text style={styles.text}>{food}mg</Text>
+        <Text style={styles.text}>{calculated.colesterol.toFixed(1)}mg</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Fibra alimentar</Text>
-        <Text style={styles.text}>{food}g</Text>
+        <Text style={styles.text}>{calculated.fibra.toFixed(1)}g</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Sódio</Text>
-        <Text style={styles.text}>{food}mg</Text>
+        <Text style={styles.text}>{calculated.sodio.toFixed(1)}mg</Text>
       </View>
 
       <View style={styles.foodItem}>
         <Text style={styles.text}>Ferro</Text>
-        <Text style={styles.text}>{food}mg</Text>
+        <Text style={styles.text}>{calculated.ferro.toFixed(1)}mg</Text>
       </View>
     </View>
   );
@@ -66,7 +62,7 @@ const TableFood = () => {
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    marginTop: 40,
+    marginTop: 10,
   },
 
   viewHeader: {
