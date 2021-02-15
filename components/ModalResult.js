@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Modal, Pressable, Text, StyleSheet} from 'react-native';
 
 const ModalResult = ({
