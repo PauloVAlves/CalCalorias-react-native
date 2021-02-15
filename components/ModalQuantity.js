@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
-  Alert,
   Modal,
   Pressable,
   Text,
   TextInput,
   StyleSheet,
 } from 'react-native';
-
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
 const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
@@ -33,7 +31,7 @@ const ModalQuantity = ({id, getData, modalEvent, modalVisible}) => {
                   modalEvent();
                 }}
               />
-            </Pressable>            
+            </Pressable>
             <TextInput
               style={styles.textInput}
               keyboardType="number-pad"

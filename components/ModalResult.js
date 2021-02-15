@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Modal,
-  Pressable,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import {View, Modal, Pressable, Text, StyleSheet} from 'react-native';
 
-
-const ModalResult = ({recipeTotalCalories, finalResult, modalEvent, setModalVisible, modalVisible}) => {
-  return(
+const ModalResult = ({
+  recipeTotalCalories,
+  finalResult,
+  modalEvent,
+  setModalVisible,
+  modalVisible,
+}) => {
+  return (
     <View style={styles.centerView}>
       <Modal
         animationType="fade"
@@ -20,8 +19,12 @@ const ModalResult = ({recipeTotalCalories, finalResult, modalEvent, setModalVisi
         }}>
         <View style={styles.centerView}>
           <View style={styles.modalView}>
-            <Text style={styles.result}>Por Porção: {finalResult.toFixed(1)}</Text>
-            <Text style={styles.total}>Total da receita: {recipeTotalCalories.toFixed(1)}</Text>
+            <Text style={styles.result}>
+              Por Porção: {finalResult.toFixed(1)}
+            </Text>
+            <Text style={styles.total}>
+              Total da receita: {recipeTotalCalories.toFixed(1)}
+            </Text>
             <Pressable
               style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}>
@@ -89,15 +92,13 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: '#cc2211',
   },
-  result:{
-    fontSize: 40
+  result: {
+    fontSize: 40,
   },
-  total:{
+  total: {
     marginTop: 20,
-    fontSize: 20
-  }
+    fontSize: 20,
+  },
 });
-
-
 
 export default ModalResult;

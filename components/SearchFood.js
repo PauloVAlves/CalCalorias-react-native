@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {DataContext} from '../data/DataContext';
 import {
   View,
   Text,
@@ -10,7 +11,8 @@ import {
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import SearchResult from './SearchResult';
 
-const AddFood = ({searchItem, addToRecipe, searchList}) => {
+const AddFood = () => {
+  const {searchItem} = useContext(DataContext);
   const [searchString, setSearchString] = useState('');
 
   const onChange = (textValue) => {
@@ -37,7 +39,7 @@ const AddFood = ({searchItem, addToRecipe, searchList}) => {
           <Icon name="search" size={20} /> Procurar
         </Text>
       </TouchableOpacity>
-      <SearchResult searchList={searchList} addToRecipe={addToRecipe} />
+      <SearchResult />
     </View>
   );
 };

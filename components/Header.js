@@ -1,10 +1,10 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-const Header = ({brand}) => {
+const Header = () => {
   return (
     <View style={styles.header}>
-      <Text style={styles.text}>{brand}</Text>
+      <Text style={styles.text}>CalCalorias</Text>
     </View>
   );
 };

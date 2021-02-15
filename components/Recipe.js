@@ -1,20 +1,16 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {DataContext} from '../data/DataContext';
 import {View, FlatList} from 'react-native';
 import RecipeItem from './RecipeItem';
 
-const Recipe = ({myList, deleteItem}) => {
+const Recipe = () => {
+  const {myList} = useContext(DataContext);
   return (
     <View>
       <FlatList
-      data={myList}
-      renderItem={({item}) => (
-        <RecipeItem item={item} deleteItem={deleteItem} />
-      )}
-      keyExtractor={(item) => item.id.toString()}
-      >
-
-    
-        </FlatList>
+        data={myList}
+        renderItem={({item}) => <RecipeItem item={item} />}
+        keyExtractor={(item) => item.id.toString()}></FlatList>
     </View>
   );
 };

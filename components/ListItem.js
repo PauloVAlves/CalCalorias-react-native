@@ -1,8 +1,11 @@
 import React from 'react';
+import {useContext} from 'react';
+import {DataContext} from '../data/DataContext';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 
-const ListItem = ({item, deleteItem}) => {
+const ListItem = () => {
+  const {item, deleteItem} = useContext(DataContext);
   return (
     <TouchableOpacity style={styles.item}>
       <View style={styles.listView}>

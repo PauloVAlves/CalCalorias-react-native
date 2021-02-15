@@ -1,9 +1,19 @@
 import React, {useState} from 'react';
-import { TextInput, StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native';
-import Icon from 'react-native-vector-icons/dist/FontAwesome'
-import ModalResult from './ModalResult'
+import {useContext} from 'react';
+import {
+  TextInput,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  Text,
+  Alert,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/dist/FontAwesome';
+import {DataContext} from '../data/DataContext';
+import ModalResult from './ModalResult';
 
-const Calculate = ({myList}) => {
+const Calculate = () => {
+  const {myList} = useContext(DataContext);
   const [portion, setPortion] = useState(0);
   const [finalResult, setFinalResult] = useState(0);
   const [recipeTotalCalories, setRecipeTotalCalories] = useState(0);
@@ -14,9 +24,8 @@ const Calculate = ({myList}) => {
   let totalRecipeCalories = 0;
   let setCaloriesPortion = 0;
 
-
   const openModal = () => {
-    setModalVisible(true);    
+    setModalVisible(true);
   };
 
   const modalEvent = () => {
@@ -24,15 +33,11 @@ const Calculate = ({myList}) => {
   };
 
   const calculate = () => {
-    if(myList.length < 1){
-      Alert.alert('Adicione alimentos à receita')
-    }
-    else if(!portion) {
-      Alert.alert('Informe a porção')
-    } else{
-
-      
-      
+    if (myList.length < 1) {
+      Alert.alert('Adicione alimentos à receita');
+    } else if (!portion) {
+      Alert.alert('Informe a porção');
+    } else {
       myList.forEach((food) => {
         totalGrams += food.quantity;
         getCaloriesPortion = food.quantity / food.base;
@@ -40,21 +45,21 @@ const Calculate = ({myList}) => {
         totalCalories += setCaloriesPortion;
         totalRecipeCalories += setCaloriesPortion;
       });
-      
+
       let div = totalGrams / portion;
       let calculatedCalories = totalCalories / div;
       setFinalResult(calculatedCalories);
       setRecipeTotalCalories(totalRecipeCalories);
-      openModal()
+      openModal();
     }
   };
-  return(
+  return (
     <View>
       <TextInput
-      keyboardType="number-pad"
-      placeholder="Informe a porção em gramas"
-      style={styles.input}
-      onChangeText={(text) => setPortion(text)}
+        keyboardType="number-pad"
+        placeholder="Informe a porção em gramas"
+        style={styles.input}
+        onChangeText={(text) => setPortion(text)}
       />
       <TouchableOpacity style={styles.btn} onPress={() => calculate()}>
         <Text style={styles.btnText}>
@@ -66,14 +71,14 @@ const Calculate = ({myList}) => {
         recipeTotalCalories={recipeTotalCalories}
         setModalVisible={setModalVisible}
         modalVisible={modalVisible}
-        modalEvent={modalEvent}        
+        modalEvent={modalEvent}
       />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  input:{
+  input: {
     textAlign: 'center',
     height: 60,
     padding: 8,
@@ -91,6 +96,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
   },
-})
+});
 
 export default Calculate;

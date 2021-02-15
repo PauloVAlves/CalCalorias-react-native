@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {DataContext} from '../data/DataContext';
 import {FlatList, View, Alert, StyleSheet} from 'react-native';
 import ModalQuantity from './ModalQuantity';
 import ResultItem from './ResultItem';
 
-const SearchResult = ({searchList, addToRecipe}) => {
+const SearchResult = () => {
+  const {searchList, addToRecipe} = useContext(DataContext);
   const [id, setId] = useState('');
   const [quantity, setQuantity] = useState('');
   const [modalVisible, setModalVisible] = useState(false);

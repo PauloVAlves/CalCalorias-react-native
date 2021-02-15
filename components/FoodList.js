@@ -1,12 +1,14 @@
-import React from 'react';
-import {View, StyleSheet} from 'react-native';
-import FoodItem from './ListItem';
+import React, {useContext} from 'react';
+import {DataContext} from '../data/DataContext';
+import {View} from 'react-native';
+import ListItem from './ListItem';
 
-const FoodList = ({foodList}) => {
+const FoodList = () => {
+  const {foodList} = useContext(DataContext);
   return (
     <View>
       {foodList.map((food) => (
-        <FoodItem key={food.id} food={food} />
+        <ListItem key={food.id} food={food} />
       ))}
     </View>
   );
