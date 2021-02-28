@@ -6,7 +6,7 @@ const ResultItem = ({item, openModal}) => {
   return (
     <TouchableOpacity style={styles.resultItem}>
       <View style={styles.resultView}>
-        <Text style={styles.resultName}>{item.description}</Text>
+        <Text style={styles.resultName}>{item.name}</Text>
         <TouchableOpacity>
           <Icon
             name="plus"

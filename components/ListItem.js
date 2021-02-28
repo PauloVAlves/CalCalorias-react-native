@@ -9,7 +9,7 @@ const ListItem = () => {
   return (
     <TouchableOpacity style={styles.item}>
       <View style={styles.listView}>
-        <Text style={styles.listItemName}>{item.description}</Text>
+        <Text style={styles.listItemName}>{item.name}</Text>
         <Icon
           name="remove"
           size={20}
