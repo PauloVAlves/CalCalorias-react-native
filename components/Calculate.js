@@ -22,19 +22,16 @@ const Calculate = () => {
 
   let totalGrams = 0;
   let getCaloriesPortion = 0;
-  let totalCalories = 0;
-  let totalRecipeCalories = 0;
   let setCaloriesPortion = 0;
+  let totalCalories = 0;
   let totalCarboidratos = 0;
   let totalProteins = 0;
-  let totalGTotais = 0;
-  let totalGSaturadas = 0;
-  let totalGTrans = 0;
-  let totalColesterol = 0;
-  let totalFibra = 0;
-  let totalSodio = 0;
-  let totalFerro = 0;
-
+  let totalFats = 0;
+  let totalSaturated = 0;
+  let totalCholesterol = 0;
+  let totalFiber = 0;
+  let totalSodium = 0;
+  let totalRecipeCalories = 0;
   const openModal = () => {
     setModalVisible(true);
   };
@@ -52,47 +49,44 @@ const Calculate = () => {
       myList.forEach((food) => {
         totalGrams += food.quantity;
         getCaloriesPortion = food.quantity / food.base;
-        setCaloriesPortion = food.cal * getCaloriesPortion;
+        setCaloriesPortion = food.carbohydrate * getCaloriesPortion;
         totalCalories += setCaloriesPortion;
         totalCarboidratos += food.carboidratos;
         totalProteins += food.proteinas;
-        totalGTotais += food.gTotais;
-        totalGSaturadas += food.gSaturadas;
-        totalGTrans += food.gTrans;
-        totalColesterol += food.colesterol;
-        totalFibra += food.fibra;
-        totalSodio += food.sodio;
-        totalFerro += food.ferro;
+        totalFats +=
+          food.saturated + food.monounsaturated + food.polyunsaturated;
+        totalSaturated += food.saturated;
+        totalCholesterol += food.cholesterol;
+        totalFiber += food.fiber;
+        totalSodium += food.sodium;
         totalRecipeCalories += setCaloriesPortion;
       });
 
       let div = totalGrams / portion;
-      let calculatedCalories = totalCalories / div;
-
+      let calculated_calories = totalCalories / div;
+      let calculated_joules = calculated_calories * 4.184;
+      let calculated_carbohydrate = totalCarboidratos / div;
+      let calculated_protein = totalProteins / div;
+      let calculated_fats = totalFats / div;
+      let calculated_saturated = totalSaturated / div;
+      let calculated_cholesterol = totalCholesterol / div;
+      let calculated_fiber = totalFiber / div;
+      let calculated_sodium = totalSodium / div;
+      setFinalResult(calculated_calories);
+      setRecipeTotalCalories(totalRecipeCalories);
       openModal();
 
-      let calculatedCarbs = totalCarboidratos / div;
-      let calculatedProteins = totalProteins / div;
-      let calculatedGTotals = totalGTotais / div;
-      let calculatedGSat = totalGSaturadas / div;
-      let calculatedTrans = totalGTrans / div;
-      let calculatedCol = totalColesterol / div;
-      let calculatedFiber = totalFibra / div;
-      let calculatedSodium = totalSodio / div;
-      let calculatedIron = totalFerro / div;
-
       setCalculated({
-        id: 1,
-        cal: calculatedCalories,
-        carboidratos: calculatedCarbs,
-        proteinas: calculatedProteins,
-        gTotais: calculatedGTotals,
-        gSaturadas: calculatedGSat,
-        gTrans: calculatedTrans,
-        colesterol: calculatedCol,
-        fibra: calculatedFiber,
-        sodio: calculatedSodium,
-        ferro: calculatedIron,
+        kcal: calculated_calories,
+        kj: calculated_joules,
+        protein: calculated_protein,
+        cholesterol: calculated_cholesterol,
+        carbohydrate: calculated_carbohydrate,
+        fiber: calculated_fiber,
+        sodium: calculated_sodium,
+        total_fats: calculated_fats,
+        saturated: calculated_saturated,
+        trans: 0,
       });
     }
   };
