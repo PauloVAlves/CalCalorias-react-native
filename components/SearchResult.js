@@ -30,7 +30,7 @@ const SearchResult = () => {
     }
   };
   return (
-    <View>
+    <View style={styles.list}>
       <FlatList
         data={searchList}
         renderItem={({item}) => (
@@ -48,5 +48,12 @@ const SearchResult = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  list: {
+    flexGrow: 1,
+    paddingBottom: 250,
+  },
+});
 
 export default SearchResult;
