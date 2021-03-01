@@ -8,6 +8,7 @@ import Header from './Header';
 import RecipeScreen from './RecipeScreen';
 import SearchFood from './SearchFood';
 import TableFood from './TableFood';
+import LottieView from 'lottie-react-native';
 
 const Tab = createMaterialTopTabNavigator();
 const NavScreen = () => {
@@ -20,8 +21,12 @@ const NavScreen = () => {
     );
   } else if (!isLoaded) {
     return (
-      <View>
-        <Text>Loading</Text>
+      <View style={styles.lottie}>
+        <LottieView
+          source={require('../assets/24703-food-animation.json')}
+          autoPlay
+          loop
+        />
       </View>
     );
   } else {
@@ -41,6 +46,24 @@ const NavScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  error: {
+    textAlign: 'center',
+    marginTop: 200,
+    fontSize: 30,
+    color: '#cc2222',
+  },
+  brand: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 'auto',
+    marginBottom: 'auto',
+    fontSize: 45,
+  },
+  lottie: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
