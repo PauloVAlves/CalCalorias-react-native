@@ -39,7 +39,7 @@ const Calculate = () => {
   const modalEvent = () => {
     setModalVisible(!modalVisible);
   };
-
+  // TODO: Refactor this monster
   const calculate = () => {
     if (myList.length < 1) {
       Alert.alert('Adicione alimentos à receita');
@@ -48,11 +48,11 @@ const Calculate = () => {
     } else {
       myList.forEach((food) => {
         totalGrams += food.quantity;
-        getCaloriesPortion = food.quantity / food.base;
-        setCaloriesPortion = food.carbohydrate * getCaloriesPortion;
+        getCaloriesPortion = food.quantity / 100;
+        setCaloriesPortion = food.kcal * getCaloriesPortion;
         totalCalories += setCaloriesPortion;
-        totalCarboidratos += food.carboidratos;
-        totalProteins += food.proteinas;
+        totalCarboidratos += food.carbohydrate;
+        totalProteins += food.protein;
         totalFats +=
           food.saturated + food.monounsaturated + food.polyunsaturated;
         totalSaturated += food.saturated;
