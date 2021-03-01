@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
 
   resultName: {
     fontSize: 22,
+    maxWidth: 260,
   },
 });
 
