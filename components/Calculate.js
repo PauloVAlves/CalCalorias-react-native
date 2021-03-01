@@ -87,6 +87,7 @@ const Calculate = () => {
         total_fats: calculated_fats,
         saturated: calculated_saturated,
         trans: 0,
+        portion: portion,
       });
     }
   };
@@ -124,13 +125,13 @@ const styles = StyleSheet.create({
   },
 
   btn: {
-    backgroundColor: '#c2bad8',
+    backgroundColor: 'rgb(1, 97, 232)',
     padding: 9,
     margin: 5,
   },
 
   btnText: {
-    color: '#3311cc',
+    color: '#fff',
     fontSize: 20,
     textAlign: 'center',
   },

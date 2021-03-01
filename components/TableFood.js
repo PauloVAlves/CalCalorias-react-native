@@ -6,13 +6,17 @@ const TableFood = () => {
   const {calculated} = useContext(DataContext);
   return (
     <View style={styles.view}>
+      <View style={styles.portion}>
+        <Text style={styles.portionText}>Porção </Text>
+        <Text style={styles.portionText}>{calculated.portion}g</Text>
+      </View>
       <View style={styles.foodItem}>
         <Text style={styles.text}>Valor Energético </Text>
-        <Text style={styles.text}>
-          {calculated.kcal.toFixed(1)}kcal = {calculated.kj.toFixed(1)}kJ
-        </Text>
+        <View>
+          <Text style={styles.text}>{calculated.kcal.toFixed(1)}kcal</Text>
+          <Text style={styles.text}>{calculated.kj.toFixed(1)}kJ</Text>
+        </View>
       </View>
-
       <View style={styles.foodItem}>
         <Text style={styles.text}>Carboidratos</Text>
         <Text style={styles.text}> {calculated.carbohydrate.toFixed(1)}g</Text>
@@ -59,12 +63,11 @@ const TableFood = () => {
 const styles = StyleSheet.create({
   view: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 30,
   },
 
   viewHeader: {
-    justifyContent: 'center',
-    marginBottom: 20,
+    alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
@@ -84,6 +87,16 @@ const styles = StyleSheet.create({
     padding: 5,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+  },
+
+  portion: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+
+  portionText: {
+    fontSize: 22,
   },
 });
 

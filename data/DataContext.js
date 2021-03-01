@@ -20,6 +20,7 @@ const DataProvider = ({children}) => {
     total_fats: 0,
     saturated: 0,
     trans: 0,
+    portion: 0,
   });
 
   useEffect(() => {
