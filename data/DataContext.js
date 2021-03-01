@@ -7,7 +7,6 @@ const DataProvider = ({children}) => {
   const [myList, setMyList] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const API_URL = 'https://floating-lowlands-85751.herokuapp.com/v1/api/food';
-  /* const API_URL = 'http://localhost:5000/v1/api/food'; */
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [calculated, setCalculated] = useState({
