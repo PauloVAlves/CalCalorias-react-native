@@ -11,27 +11,16 @@ import {
 import Icon from 'react-native-vector-icons/dist/FontAwesome';
 import {DataContext} from '../data/DataContext';
 import ModalResult from './ModalResult';
-import TableFood from './TableFood';
 
 const Calculate = () => {
-  const {myList, setCalculated} = useContext(DataContext);
+  const {recipe, setCalculated} = useContext(DataContext);
   const [portion, setPortion] = useState(0);
   const [finalResult, setFinalResult] = useState(0);
   const [recipeTotalCalories, setRecipeTotalCalories] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
 
-  let totalGrams = 0;
-  let getCaloriesPortion = 0;
-  let setCaloriesPortion = 0;
-  let totalCalories = 0;
-  let totalCarboidratos = 0;
-  let totalProteins = 0;
-  let totalFats = 0;
-  let totalSaturated = 0;
-  let totalCholesterol = 0;
-  let totalFiber = 0;
-  let totalSodium = 0;
-  let totalRecipeCalories = 0;
+  const base = 100;
+
   const openModal = () => {
     setModalVisible(true);
   };
@@ -39,53 +28,115 @@ const Calculate = () => {
   const modalEvent = () => {
     setModalVisible(!modalVisible);
   };
-  // TODO: Refactor this monster
+
+  const calculateTotalGrams = (recipe, portion) => {
+    let totalGrams = 0;
+    recipe.map((food) => (totalGrams += food.quantity / portion));
+    return totalGrams;
+  };
+
+  const totalGrams = calculateTotalGrams(recipe, portion);
+
+  const calculateCarbohydrate = (recipe, totalGrams) => {
+    let totalCarbohydrate = 0;
+    recipe.map((food) => (totalCarbohydrate += food.carbohydrate / totalGrams));
+    return totalCarbohydrate;
+  };
+
+  const calculateProtein = (recipe, totalGrams) => {
+    let totalProtein = 0;
+    recipe.map((food) => (totalProtein += food.protein / totalGrams));
+    return totalProtein;
+  };
+
+  const calculateSaturatedFat = (recipe, totalGrams) => {
+    let totalSaturated = 0;
+    recipe.map((food) => (totalSaturated += food.saturated / totalGrams));
+    return totalSaturated;
+  };
+
+  const calculateTotalFats = (recipe, totalGrams) => {
+    let totalFats = 0;
+    recipe.map(
+      (food) =>
+        (totalFats +=
+          (food.saturated + food.monounsaturated + food.polyunsaturated) /
+          totalGrams),
+    );
+    return totalFats;
+  };
+
+  const calculateCholesterol = (recipe, totalGrams) => {
+    let totalCholesterol = 0;
+    recipe.map((food) => (totalCholesterol += food.cholesterol / totalGrams));
+    return totalCholesterol;
+  };
+
+  const calculateFiber = (recipe, totalGrams) => {
+    let totalFiber = 0;
+    recipe.map((food) => (totalFiber += food.fiber / totalGrams));
+    return totalFiber;
+  };
+
+  const calculateSodium = (recipe, totalGrams) => {
+    let totalSodium = 0;
+    recipe.map((food) => (totalSodium += food.sodium / totalGrams));
+    return totalSodium;
+  };
+
+  const caloriesPortion = (recipe) => {
+    let quantityPortion = 0;
+    let caloriesPortion = 0;
+    recipe.map(
+      (food) => (
+        (quantityPortion = food.quantity / base),
+        (caloriesPortion = food.kcal * quantityPortion)
+      ),
+    );
+    setRecipeTotalCalories(caloriesPortion);
+    return caloriesPortion;
+  };
+
+  const calculateCalories = (caloriesPortion, recipe, totalGrams) => {
+    let totalCalories = 0;
+    recipe.map((food) => (totalCalories += caloriesPortion / totalGrams));
+    setFinalResult(totalCalories);
+    return totalCalories;
+  };
+
+  const calculateJoules = (calories) => {
+    return calories * 4.184;
+  };
+
   const calculate = () => {
-    if (myList.length < 1) {
+    if (recipe.length < 1) {
       Alert.alert('Adicione alimentos à receita');
     } else if (!portion) {
       Alert.alert('Informe a porção');
     } else {
-      myList.forEach((food) => {
-        totalGrams += food.quantity;
-        getCaloriesPortion = food.quantity / 100;
-        setCaloriesPortion = food.kcal * getCaloriesPortion;
-        totalCalories += setCaloriesPortion;
-        totalCarboidratos += food.carbohydrate;
-        totalProteins += food.protein;
-        totalFats +=
-          food.saturated + food.monounsaturated + food.polyunsaturated;
-        totalSaturated += food.saturated;
-        totalCholesterol += food.cholesterol;
-        totalFiber += food.fiber;
-        totalSodium += food.sodium;
-        totalRecipeCalories += setCaloriesPortion;
-      });
+      const calories_portion = caloriesPortion(recipe);
+      const carbohydrate = calculateCarbohydrate(recipe, totalGrams);
+      const protein = calculateProtein(recipe, totalGrams);
+      const saturated = calculateSaturatedFat(recipe, totalGrams);
+      const total_fats = calculateTotalFats(recipe, totalGrams);
+      const cholesterol = calculateCholesterol(recipe, totalGrams);
+      const fiber = calculateFiber(recipe, totalGrams);
+      const sodium = calculateSodium(recipe, totalGrams);
+      const calories = calculateCalories(calories_portion, recipe, totalGrams);
+      const joules = calculateJoules(calories);
 
-      let div = totalGrams / portion;
-      let calculated_calories = totalCalories / div;
-      let calculated_joules = calculated_calories * 4.184;
-      let calculated_carbohydrate = totalCarboidratos / div;
-      let calculated_protein = totalProteins / div;
-      let calculated_fats = totalFats / div;
-      let calculated_saturated = totalSaturated / div;
-      let calculated_cholesterol = totalCholesterol / div;
-      let calculated_fiber = totalFiber / div;
-      let calculated_sodium = totalSodium / div;
-      setFinalResult(calculated_calories);
-      setRecipeTotalCalories(totalRecipeCalories);
       openModal();
 
       setCalculated({
-        kcal: calculated_calories,
-        kj: calculated_joules,
-        protein: calculated_protein,
-        cholesterol: calculated_cholesterol,
-        carbohydrate: calculated_carbohydrate,
-        fiber: calculated_fiber,
-        sodium: calculated_sodium,
-        total_fats: calculated_fats,
-        saturated: calculated_saturated,
+        kcal: calories,
+        kj: joules,
+        protein: protein,
+        cholesterol: cholesterol,
+        carbohydrate: carbohydrate,
+        fiber: fiber,
+        sodium: sodium,
+        total_fats: total_fats,
+        saturated: saturated,
         trans: 0,
         portion: portion,
       });
