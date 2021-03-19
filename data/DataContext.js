@@ -1,12 +1,11 @@
 import React, {useState, useEffect, createContext} from 'react';
-
+import foodDB from './taco.json';
 export const DataContext = createContext();
 
 const DataProvider = ({children}) => {
   const [foodList, setFoodList] = useState([]);
   const [myList, setMyList] = useState([]);
   const [searchList, setSearchList] = useState([]);
-  const API_URL = 'https://floating-lowlands-85751.herokuapp.com/v1/api/food';
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
   const [calculated, setCalculated] = useState({
@@ -25,25 +24,13 @@ const DataProvider = ({children}) => {
 
   useEffect(() => {
     const fetchFoods = () => {
-      fetch(API_URL, {
-        method: 'GET',
-        mode: 'cors',
-        cache: 'no-cache',
-        headers: {
-          'content-type': 'application/json',
-        },
-      })
-        .then((res) => res.json())
-        .then(
-          (result) => {
-            setIsLoaded(true);
-            setFoodList(result);
-          },
-          (error) => {
-            setIsLoaded(true);
-            setError(error);
-          },
-        );
+      try {
+        setIsLoaded(true);
+        setFoodList(foodDB);
+      } catch (error) {
+        setIsLoaded(true);
+        setError(error);
+      }
     };
 
     fetchFoods();
