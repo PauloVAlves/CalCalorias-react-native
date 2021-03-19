@@ -4,7 +4,7 @@ export const DataContext = createContext();
 
 const DataProvider = ({children}) => {
   const [foodList, setFoodList] = useState([]);
-  const [myList, setMyList] = useState([]);
+  const [recipe, setRecipe] = useState([]);
   const [searchList, setSearchList] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setError] = useState(null);
@@ -45,7 +45,7 @@ const DataProvider = ({children}) => {
   };
 
   const deleteItem = (id) => {
-    setMyList((prev) => {
+    setRecipe((prev) => {
       return prev.filter((item) => item.id !== id);
     });
   };
@@ -68,7 +68,7 @@ const DataProvider = ({children}) => {
           polyunsaturated: item.polyunsaturated,
           quantity: Number(quantity),
         };
-        setMyList([...myList, food]);
+        setRecipe([...recipe, food]);
       }
     });
   };
@@ -79,7 +79,7 @@ const DataProvider = ({children}) => {
         foodList,
         setFoodList,
         searchList,
-        myList,
+        recipe,
         searchItem,
         deleteItem,
         addToRecipe,

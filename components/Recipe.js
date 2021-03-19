@@ -4,11 +4,11 @@ import {View, FlatList, StyleSheet} from 'react-native';
 import RecipeItem from './RecipeItem';
 
 const Recipe = () => {
-  const {myList} = useContext(DataContext);
+  const {recipe} = useContext(DataContext);
   return (
     <View style={styles.list}>
       <FlatList
-        data={myList}
+        data={recipe}
         renderItem={({item}) => <RecipeItem item={item} />}
         keyExtractor={(item) => item.id.toString()}></FlatList>
     </View>
